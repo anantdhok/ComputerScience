@@ -5,14 +5,13 @@ int BinarySearchImperative(int key, vector<int> data) {
     int l = 0, m = 0, h = data.size();
 
     while (l <= h) {
-       m = (l + h) / 2;
-        if (data[m] == key) {
+        m = (l + h) / 2;
+        if (data[m] == key)
             return m;
-        } else if (data[m] < key) {
+        else if (data[m] < key)
             l = m + 1;
-        } else {
+        else
             h = m - 1;
-        }
     }
     
     return -1;
@@ -22,13 +21,12 @@ int BinarySearchRecurssive(int key, vector<int> data, int l, int h) {
     int m = (l + h) / 2;
 
     if (l <= h) {
-        if (data[m] == key) {
+        if (data[m] == key)
             return m;
-        } else if (data[m] < key) {
+        else if (data[m] < key)
             return BinarySearchRecurssive(key, data, m + 1, h);
-        } else {
+        else
             return BinarySearchRecurssive(key, data, l, m - 1); 
-        }
     }
 
     return -1;
@@ -40,9 +38,8 @@ int main() {
     sort(data.begin(), data.end());
 
     cout << "\n Sorted List : ";
-    for (int i : data) {
+    for (int i : data)
         cout << i << " ";
-    }
 
     cout << "\n At index : " << BinarySearchImperative(key, data);
     cout << "\n At index : " << BinarySearchRecurssive(key, data, 0, data.size()-1);

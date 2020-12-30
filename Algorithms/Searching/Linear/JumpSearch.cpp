@@ -5,17 +5,15 @@ int JumpSearch(int key, vector<int> data) {
     int i = 0, p = 0;
 
     while (data[i] < key) {
-        if (i >= data.size()) {
+        if (i >= data.size())
             break;
-        }
         p = i;
         i += sqrt(data.size());
     }
 
     while (i >= p) {
-        if (data[i] == key) {
+        if (data[i] == key)
             break;
-        }
         i -= 1;
     }
 
@@ -28,9 +26,8 @@ int main() {
     sort(data.begin(), data.end());
 
     cout << "\n Sorted List : ";
-    for (int i : data) {
+    for (int i : data)
         cout << i << " ";
-    }
 
     cout << "\n At index : " <<  JumpSearch(key, data);
     return 0;
