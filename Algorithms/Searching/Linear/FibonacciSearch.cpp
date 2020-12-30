@@ -9,9 +9,8 @@ int Fibonacci(int index, int a = 0, int b = 1) {
     if (index == 0) {
         return a;
     }
-    b = a + b;
-    a = b - a;
-    return Fibonacci(index - 1, a, b);
+
+    return Fibonacci(index - 1, b, a+b);
 }
 
 int FibonacciSearch(int key, vector<int> data) {
@@ -42,7 +41,7 @@ int FibonacciSearch(int key, vector<int> data) {
 
 int main() {
     int key = 4;
-    vector<int> data{ 1, 5, 2, 7, 4, 8, 2, 0, 9};
+    vector<int> data{ 1, 5, 2, 7, 4, 8, 3, 0, 9};
     sort(data.begin(), data.end());
 
     cout << "\n Sorted List : ";
@@ -50,6 +49,6 @@ int main() {
         cout << i << " ";
     }
 
-    cout << "\n At index : " <<  FibonacciSearch(key, data);
+    cout << "\n At index : " << FibonacciSearch(key, data);
     return 0;
 }

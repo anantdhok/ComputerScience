@@ -24,7 +24,7 @@ int JumpSearch(int key, vector<int> data) {
 
 int main() {
     int key = 4;
-    vector<int> data{ 1, 5, 2, 7, 4, 8, 2, 0, 8};
+    vector<int> data{ 1, 5, 2, 7, 4, 8, 3, 0, 9};
     sort(data.begin(), data.end());
 
     cout << "\n Sorted List : ";

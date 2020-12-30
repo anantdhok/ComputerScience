@@ -16,7 +16,8 @@ int Search(int key, vector<int> data) {
 
 int main() {
     int key = 4;
-    vector<int> data{ 1, 5, 2, 7, 4, 8, 2, 0, 8};
+    vector<int> data{ 1, 5, 2, 7, 4, 8, 3, 0, 9};
+    
     cout << "\n At index : " << Search(key, data);
     return 0;
 }
