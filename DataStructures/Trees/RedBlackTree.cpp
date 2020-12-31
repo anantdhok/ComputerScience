@@ -49,7 +49,7 @@ struct node *successor(struct node *head) {
   return current;
 }
 
-struct node *pRedecessor(struct node *head) {
+struct node *predecessor(struct node *head) {
   if (head->left != NULL)
     return maximum(head->left);
 
@@ -61,25 +61,25 @@ struct node *pRedecessor(struct node *head) {
   return current;
 }
 
-void rotateLeft(struct node *head, struct node *grand) { 
-  current = grand->right; 
-  grand->right = current->left; 
-  if (grand->right != NULL) 
-    grand->right->parent = grand; 
-  current->parent = grand->parent; 
+void rotateLeft(struct node *node) { 
+  current = node->right; 
+  node->right = current->left; 
+  if (node->right != NULL) 
+    node->right->parent = node; 
+  current->parent = node->parent; 
 
-  if (grand->parent == NULL) 
-    head = current; 
-  else if (grand == grand->parent->left) 
-    grand->parent->left = current; 
+  if (node->parent == NULL) 
+    root = current; 
+  else if (node == node->parent->left) 
+    node->parent->left = current; 
   else
-    grand->parent->right = current; 
+    node->parent->right = current; 
 
-  current->left = grand; 
-  grand->parent = current; 
+  current->left = node; 
+  node->parent = current; 
 } 
   
-void rotateRight(struct node *head, struct node *node) { 
+void rotateRight(struct node *node) { 
   current = node->left; 
   node->left = current->right; 
   if (node->left != NULL) 
@@ -87,7 +87,7 @@ void rotateRight(struct node *head, struct node *node) {
   current->parent = node->parent; 
 
   if (node->parent == NULL) 
-    head = current; 
+    root = current; 
   else if (node == node->parent->left) 
     node->parent->left = current; 
   else
@@ -115,11 +115,11 @@ void balanceTreeInsert(struct node *head, struct node *newnode) {
       } 
       else { 
         if (newnode == parent->right) { 
-          rotateLeft(head, parent); 
+          rotateLeft(parent); 
           newnode = parent; 
           parent = newnode->parent; 
         } 
-        rotateRight(head, grand); 
+        rotateRight(grand); 
         swap(parent, grand); 
         newnode = parent; 
       } 
@@ -134,11 +134,11 @@ void balanceTreeInsert(struct node *head, struct node *newnode) {
       } 
       else { 
         if (newnode == parent->left) { 
-          rotateRight(head, parent); 
+          rotateRight(parent); 
           newnode = parent; 
           parent = newnode->parent;
         } 
-        rotateLeft(head, grand); 
+        rotateLeft(grand); 
         swap(parent, grand); 
         newnode = parent; 
       } 
@@ -147,63 +147,64 @@ void balanceTreeInsert(struct node *head, struct node *newnode) {
   head->color = Black; 
 } 
 
-struct node *balanceTreeRemove(struct node *head, struct node *newnode) {
+void balanceTreeRemove(struct node *head, struct node *newnode) {
+  struct node *parent = NULL;
+
   while (newnode != head && newnode->color == Red) {
     if (newnode == newnode->parent->left) {
-      current = newnode->parent->right;
-      if (current->color == Black) {
-        current->color = Red;
+      parent = newnode->parent->right;
+      if (parent->color == Black) {
+        parent->color = Red;
         newnode->parent->color = Black;
-        rotateLeft(head, newnode->parent);
-        current = newnode->parent->right;
+        rotateLeft(newnode->parent);
+        parent = newnode->parent->right;
       }
-      else if (current->left->color == Red && current->right->color == Red) {
-        current->color = Black;
+      else if (parent->left->color == Red && parent->right->color == Red) {
+        parent->color = Black;
         newnode = newnode->parent;
       }
       else {
-        if (current->right->color == Red) {
-          current->left->color = Red;
-          current->color = Black;
-          rotateRight(head, current);
-          current = newnode->parent->right;
+        if (parent->right->color == Red) {
+          parent->left->color = Red;
+          parent->color = Black;
+          rotateRight(parent);
+          parent = newnode->parent->right;
         }
-        current->color = newnode->parent->color;
+        parent->color = newnode->parent->color;
         newnode->parent->color = Red;
-        current->right->color = Red;
-        rotateLeft(head, newnode->parent);
+        parent->right->color = Red;
+        rotateLeft(newnode->parent);
         newnode = head;
       }
     }
     else {
-      current = newnode->parent->left;
-      if (current->color == Black) {
-        current->color = Red;
+      parent = newnode->parent->left;
+      if (parent->color == Black) {
+        parent->color = Red;
         newnode->parent->color = Black;
-        rotateRight(head, newnode->parent);
-        current = newnode->parent->left;
+        rotateRight(newnode->parent);
+        parent = newnode->parent->left;
       }
-      else if (current->right->color == Red && current->right->color == Red) {
-        current->color = Black;
+      else if (parent->right->color == Red && parent->right->color == Red) {
+        parent->color = Black;
         newnode = newnode->parent;
       }
       else {
-        if (current->left->color == Red) {
-          current->right->color = Red;
-          current->color = Black;
-          rotateLeft(head, current);
-          current = newnode->parent->left;
+        if (parent->left->color == Red) {
+          parent->right->color = Red;
+          parent->color = Black;
+          rotateLeft(parent);
+          parent = newnode->parent->left;
         }
-        current->color = newnode->parent->color;
+        parent->color = newnode->parent->color;
         newnode->parent->color = Red;
-        current->left->color = Red;
-        rotateRight(head, newnode->parent);
+        parent->left->color = Red;
+        rotateRight(newnode->parent);
         newnode = head;
       }
     }
   }
   newnode->color = Red;
-  return head;
 }
 
 struct node *create() {
@@ -271,7 +272,7 @@ struct node *remove(struct node *head, int key) {
   }
   free(current);
   if (temp == 0)
-    head = balanceTreeRemove(head, uncle);
+    balanceTreeRemove(head, uncle);
   return head;
 }
 
@@ -323,12 +324,6 @@ int main() {
               break;
       case 2: cout << "\n Enter the data to be removed : ";
               cin >> d;
-              if (root != NULL)
-                root = remove(root, d);
-              else {
-                cout << "\n Tree is Empty.";
-                getch();
-              }
               break;
       case 3: cout << "\n Enter the data to search : ";
               cin >> d;
