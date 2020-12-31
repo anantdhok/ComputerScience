@@ -1,6 +1,6 @@
 # ComputerScience
 
-Author:
+Author-
 Anant Dhok, anantdhok16@gmail.com
 This repository contains necessary computer science programs.
 
