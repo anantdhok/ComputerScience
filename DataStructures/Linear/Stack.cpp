@@ -7,7 +7,7 @@ struct Stack {
 	int *arr;
 
 	Stack(int size) { 
-        top = -1; 
+		top = -1; 
 		arr = new int[size];
 	}
 
