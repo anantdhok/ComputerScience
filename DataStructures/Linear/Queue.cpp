@@ -6,8 +6,8 @@ struct Queue {
 	int front, rear;
 	int *arr;
 
-	Queue(int size) { 
-        front = rear = 0; 
+	Queue(int size) {
+		front = rear = 0; 
 		arr = new int[size];
 	}
 
