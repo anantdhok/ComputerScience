@@ -6,7 +6,7 @@ struct Stack {
 	int top;
 	int *arr;
 
-	Stack(int size) { 
+	Stack(int size) {
 		top = -1; 
 		arr = new int[size];
 	}
