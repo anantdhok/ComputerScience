@@ -5,6 +5,7 @@ This repository contains necessary computer science programs.
 Features
 - Algorithms
 - Data Structures
+- Operating Systems
 
 Requirement
 - C++
