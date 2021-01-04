@@ -71,7 +71,7 @@ struct Stack {
 			int d = top;
 			cout << "\n Stack - ";
 			while (d >= 0)
-				cout << arr[d--] << "\t";
+				cout << arr[d--] << " ";
 		}
 		getch();
 	}

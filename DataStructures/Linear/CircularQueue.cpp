@@ -75,8 +75,8 @@ struct Queue {
     else {
       cout << "\n Queue - ";
       for (d = front; d != rear; d = (d + 1) % capacity)
-        cout << arr[d] << "\t";
-      cout << arr[d] << "\t";
+        cout << arr[d] << " ";
+      cout << arr[d] << " ";
     }
     getch();
   }

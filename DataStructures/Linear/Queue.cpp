@@ -70,7 +70,7 @@ struct Queue {
 		else {
 			cout << "\n Queue - ";
 			for (int d = front; d < rear; d++)
-				cout << arr[d] << "\t";
+				cout << arr[d] << " ";
 		}
 		getch();
 	}
