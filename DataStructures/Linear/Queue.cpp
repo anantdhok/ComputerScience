@@ -3,11 +3,12 @@
 using namespace std;
 
 struct Queue {
-	int front, rear;
+	int front, rear, capacity;
 	int *arr;
 
 	Queue(int size) {
-		front = rear = 0; 
+		front = rear = 0;
+		capacity = size;
 		arr = new int[size];
 	}
 
@@ -15,10 +16,22 @@ struct Queue {
 		delete[] arr;
 	}
 
+	int isEmpty() {
+		if (front == rear)
+			return 1;
+		return 0;
+	}
+
+	int isFull() {
+		if (rear > capacity)
+			return 1;
+		return 0;
+	}
+
 	void enqueue() {
 		int d = 0;
 		while (d == 0) {
-			if (rear > sizeof(arr)) {
+			if (isFull()) {
 				cout << "\n Queue is Full.";
 				getch();
 				break;
@@ -35,7 +48,7 @@ struct Queue {
 	void dequeue() {
 		int d = 0;
 		while (d == 0) {
-			if (front == rear){
+			if (isEmpty()){
 				cout << "\n Queue is Empty.";
 				getch();
 				break;
@@ -52,7 +65,7 @@ struct Queue {
 	}
 
 	void display() {
-		if (front == rear)
+		if (isEmpty())
 			cout << "\n Queue is Empty.";
 		else {
 			cout << "\n Queue - ";

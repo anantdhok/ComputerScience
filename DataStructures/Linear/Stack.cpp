@@ -3,11 +3,12 @@
 using namespace std;
 
 struct Stack {
-	int top;
+	int top, capacity;
 	int *arr;
 
 	Stack(int size) {
-		top = -1; 
+		top = -1;
+		capacity = size;
 		arr = new int[size];
 	}
 
@@ -15,10 +16,22 @@ struct Stack {
 		delete[] arr;
 	}
 
+	int isEmpty() {
+		if (top < 0)
+			return 1;
+		return 0;
+	}
+
+	int isFull() {
+		if (top >= capacity - 1)
+			return 1;
+		return 0;
+	}
+
 	void push() {
 		int d = 0;
 		while (d == 0) {
-			if (top >= 4) {
+			if (isFull()) {
 				cout << "\n Stack is Full.";
 				getch();
 				break;
@@ -37,7 +50,7 @@ struct Stack {
 	void pop() {
 		int d = 0;
 		while (d == 0) {
-			if (top < 0) {
+			if (isEmpty()) {
 				cout << "\n Stack is Empty.";
 				getch();
 				break;
@@ -52,7 +65,7 @@ struct Stack {
 	}
 
 	void display() {
-		if (top < 0)
+		if (isEmpty())
 			cout << "\n Stack is Empty.";
 		else {
 			int d = top;
