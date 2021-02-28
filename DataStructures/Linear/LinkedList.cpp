@@ -4,14 +4,14 @@ using namespace std;
 
 struct node {
   int data;
-  struct node *next, *prev;
+  struct node *next;
 } *root, *current, *previous, *head, *traverse;
 
 struct node *create() {
   struct node *newnode = (struct node *)malloc(sizeof(struct node));
   cout << "\n Enter the data : ";
   cin >> newnode->data;
-  newnode->next = newnode->prev = NULL;
+  newnode->next = NULL;
   return newnode;
 }
 
