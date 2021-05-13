@@ -14,8 +14,8 @@ This repository contains necessary computer science programs.
 
 
 ## Contribute
-- Issue Tracker: github.com/anantdhok/ComputerScience/issues
-- Pull Requests: github.com/anantdhok/ComputerScience/pulls
+- Issue Tracker: `github.com/anantdhok/ComputerScience/issues`
+- Pull Requests: `github.com/anantdhok/ComputerScience/pulls`
 
   
 ## Author
